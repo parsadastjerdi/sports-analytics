@@ -21,12 +21,24 @@ public class PlayerDataAccessService implements PlayerDao {
 
     @Override
     public int insertPlayer(UUID playerId, Player player) {
-        return 0;
+        final String sql = "INSERT INTO player " +
+                "(playerId, teamId, firstName, lastName, position, height, weight, age)" +
+                " values (?, ?, ?, ?, ?, ?, ?, ?);";
+
+        return jdbcTemplate.update(sql,
+                playerId,
+                player.getTeamId(),
+                player.getFirstName(),
+                player.getLastName(),
+                player.getPosition(),
+                player.getHeight(),
+                player.getWeight(),
+                player.getAge());
     }
 
     @Override
     public List<Player> selectAllPlayers() {
-        final String sql = "SELECT * from Player;";
+        final String sql = "SELECT * from player;";
         return jdbcTemplate.query(sql, (resultSet, i) -> {
             UUID playerId = UUID.fromString(resultSet.getString("playerId"));
             UUID teamId = UUID.fromString(resultSet.getString("teamId"));
@@ -45,7 +57,7 @@ public class PlayerDataAccessService implements PlayerDao {
 
     @Override
     public Optional<Player> selectPlayerById(UUID playerId) {
-        final String sql = "SELECT * FROM player WHERE playerId = ?";
+        final String sql = "SELECT * FROM player WHERE playerId = ?;";
         Player player =  jdbcTemplate.queryForObject(sql, new Object[]{playerId}, (resultSet, i) -> {
             UUID id = UUID.fromString(resultSet.getString("playerId"));
             UUID teamId = UUID.fromString(resultSet.getString("teamId"));
@@ -65,11 +77,23 @@ public class PlayerDataAccessService implements PlayerDao {
 
     @Override
     public int deletePlayerById(UUID playerId) {
-        return 0;
+        final String sql = "DELETE FROM player WHERE playerId = ?;";
+        return jdbcTemplate.update(sql, playerId);
     }
 
     @Override
     public int updatePlayerById(UUID playerId, Player player) {
-        return 0;
+        final String sql = "UPDATE player SET "
+                + "firstName = ?, lastName = ?, position = ?, height = ?, weight = ?, age = ? "
+                + "WHERE playerId = ?;";
+
+        return jdbcTemplate.update(sql,
+                player.getFirstName(),
+                player.getLastName(),
+                player.getPosition(),
+                player.getHeight(),
+                player.getWeight(),
+                player.getAge(),
+                playerId);
     }
 }
