@@ -45,7 +45,22 @@ public class PlayerDataAccessService implements PlayerDao {
 
     @Override
     public Optional<Player> selectPlayerById(UUID playerId) {
-        return Optional.empty();
+        final String sql = "SELECT * FROM player WHERE playerId = ?";
+        Player player =  jdbcTemplate.queryForObject(sql, new Object[]{playerId}, (resultSet, i) -> {
+            UUID id = UUID.fromString(resultSet.getString("playerId"));
+            UUID teamId = UUID.fromString(resultSet.getString("teamId"));
+
+            return new Player(
+                    id,
+                    teamId,
+                    resultSet.getString("firstName"),
+                    resultSet.getString("lastName"),
+                    resultSet.getString("position"),
+                    resultSet.getString("height"),
+                    resultSet.getString("weight"),
+                    resultSet.getInt("age"));
+        });
+        return Optional.ofNullable(player);
     }
 
     @Override
