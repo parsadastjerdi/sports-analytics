@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,7 +21,7 @@ public class PlayerController {
     }
 
     @PostMapping
-    public void addPlayer(@RequestBody Player player) {
+    public void addPlayer(@Valid @NonNull @RequestBody Player player) {
         playerService.addPlayer(player);
     }
 
@@ -40,9 +41,9 @@ public class PlayerController {
         playerService.deletePlayer(playerId);
     }
 
-    // @Valid @NonNull not showing up
     @PutMapping(path = "{playerId}")
-    public void updatePlayerById(@PathVariable("playerId") UUID playerId, @NonNull @RequestBody Player player) {
+    public void updatePlayerById(@PathVariable("playerId") UUID playerId,
+                                 @Valid @NonNull @RequestBody Player player) {
         playerService.updatePlayer(playerId, player);
     }
 }

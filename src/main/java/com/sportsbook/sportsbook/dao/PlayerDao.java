@@ -7,10 +7,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface PlayerDao {
-    // Insert a person with a given ID
     int insertPlayer(UUID playerId, Player player);
 
-    // Insert a person without a given ID
     default int insertPlayer(Player player) {
         UUID id = UUID.randomUUID();
         return insertPlayer(id, player);

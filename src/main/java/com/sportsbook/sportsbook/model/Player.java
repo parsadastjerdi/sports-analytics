@@ -2,18 +2,24 @@ package com.sportsbook.sportsbook.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.validation.constraints.NotBlank;
 import java.util.UUID;
 
-// TODO: replace explicit constructor and getters/setters with lombok
 public class Player {
     private final UUID playerId;
     private final UUID teamId; // should be one to many
-    // @NotBlank not showing up here
+
+    @NotBlank
     private final String firstName;
+    @NotBlank
     private final String lastName;
+    @NotBlank
     private final String position;
+    @NotBlank
     private final String height;
+    @NotBlank
     private final String weight;
+    @NotBlank
     private final Integer age;
 
     public Player(@JsonProperty("playerId") UUID playerId,
@@ -65,4 +71,5 @@ public class Player {
     public Integer getAge() {
         return age;
     }
+
 }

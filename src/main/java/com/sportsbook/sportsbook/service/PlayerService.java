@@ -15,7 +15,7 @@ public class PlayerService {
     private final PlayerDao playerDao;
 
     @Autowired
-    public PlayerService(@Qualifier("postgres") PlayerDao playerDao) {
+    public PlayerService(@Qualifier("playerDao") PlayerDao playerDao) {
         this.playerDao = playerDao;
     }
 
