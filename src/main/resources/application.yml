@@ -1,0 +1,6 @@
+app:
+  datasource:
+    jdbc-url: jdbc:postgresql://localhost:5432/sportsbookdb
+    username: postgres
+    password: sportsbook
+    pool-size: 30
