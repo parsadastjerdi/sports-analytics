@@ -32,7 +32,6 @@ public class SeasonDataAccessService implements SeasonDao {
     @Override
     public List<Season> selectAllSeasons() {
         final String sql = "SELECT * FROM season;";
-
         return jdbcTemplate.query(sql, (resultSet, i) -> {
             UUID seasonId = UUID.fromString(resultSet.getString("seasonId"));
             return new Season(
@@ -45,14 +44,12 @@ public class SeasonDataAccessService implements SeasonDao {
     @Override
     public Optional<Season> selectSeasonById(UUID seasonId) {
         final String sql = "SELECT * FROM season WHERE seasonId = ?;";
-
         Season season = jdbcTemplate.queryForObject(sql, new Object[]{seasonId}, (resultSet, i) -> {
            UUID id = UUID.fromString(resultSet.getString("seasonId"));
            return new Season(id,
                    resultSet.getDate("startDate"),
                    resultSet.getDate("endDate"));
         });
-
         return Optional.ofNullable(season);
     }
 
