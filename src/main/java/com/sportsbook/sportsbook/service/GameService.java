@@ -35,4 +35,8 @@ public class GameService {
     public int updateGame(UUID gameId, Game game) {
         return gameDao.updateGameById(gameId, game);
     }
+
+    public List<Game> getAllGamesWhoseDiffWasLessThanX(Integer pointDifference) {
+        return gameDao.getAllGamesWhoseDiffWasLessThanX(pointDifference);
+    }
 }

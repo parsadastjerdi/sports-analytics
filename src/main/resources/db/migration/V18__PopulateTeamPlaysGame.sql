@@ -1,5 +1,7 @@
--- insert into TeamPlaysGame(homeTeamId, awayTeamId, gameId, homeTeamScore, awayTeamScore) (
-   --  select homeTeam.teamId, awayTeam.teamId, game.gameId, 0, 0
-    -- from team as homeTeam, team as awayTeam, game
-    -- where homeTeam.teamId <> awayTeam.teamId
--- );
+insert into TeamPlaysGame(teamId, gameId, homeTeamScore, awayTeamScore)
+select team.teamId, game.gameId, round(random() * 100), round(random() * 100)
+from team, game
+
+
+
+

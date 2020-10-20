@@ -69,4 +69,20 @@ public class GameDataAccessService implements GameDao {
                 game.getGameDate(),
                 gameId);
     }
+
+    @Override
+    public List<Game> getAllGamesWhoseDiffWasLessThanX(Integer pointDifference) {
+        final String sql = "select game.* " +
+                "from game, TeamPlaysGame " +
+                "where (TeamPlaysGame.homeTeamScore - TeamPlaysGame.awayTeamScore < ?) " +
+                "    AND (TeamPlaysGame.homeTeamScore - TeamPlaysGame.awayTeamScore >= 0) " +
+                "    AND TeamPlaysGame.gameId = game.gameId;";
+        return jdbcTemplate.query(sql, (resultSet, i) -> {
+            UUID gameId = UUID.fromString(resultSet.getString("gameId"));
+            return new Game(
+                    gameId,
+                    resultSet.getString("venue"),
+                    resultSet.getDate("gameDate"));
+        }, pointDifference);
+    }
 }

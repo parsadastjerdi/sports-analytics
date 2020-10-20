@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -89,5 +90,24 @@ public class PlayerDataAccessService implements PlayerDao {
                 player.getWeight(),
                 player.getAge(),
                 playerId);
+    }
+
+    @Override
+    public List<Player> getAllPlayersOnATeam(UUID teamId) {
+        final String sql = "SELECT player.* " +
+                "FROM player, PlaysForTeam " +
+                "WHERE player.playerId = PlaysForTeam.playerId AND " +
+                "    PlaysForTeam.teamId = ?;";
+        return jdbcTemplate.query(sql, (resultSet, i) -> {
+            UUID playerId = UUID.fromString(resultSet.getString("playerId"));
+            return new Player(
+                    playerId,
+                    resultSet.getString("firstName"),
+                    resultSet.getString("lastName"),
+                    resultSet.getString("position"),
+                    resultSet.getInt("height"),
+                    resultSet.getInt("weight"),
+                    resultSet.getInt("age"));
+            }, teamId);
     }
 }

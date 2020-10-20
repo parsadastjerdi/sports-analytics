@@ -21,4 +21,6 @@ public interface GameDao {
     int deleteGameById(UUID gameId);
 
     int updateGameById(UUID gameId, Game game);
+
+    List<Game> getAllGamesWhoseDiffWasLessThanX(Integer pointDifference);
 }

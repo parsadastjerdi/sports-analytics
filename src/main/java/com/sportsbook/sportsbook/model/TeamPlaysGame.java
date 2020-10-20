@@ -5,9 +5,7 @@ import java.util.UUID;
 
 public class TeamPlaysGame {
     @NotBlank
-    private final UUID homeTeamId;
-    @NotBlank
-    private final UUID awayTeamId;
+    private final UUID teamId;
     @NotBlank
     private final UUID gameId;
     @NotBlank
@@ -15,24 +13,18 @@ public class TeamPlaysGame {
     @NotBlank
     private final Integer awayTeamScore;
 
-    public TeamPlaysGame(UUID homeTeamId,
-                         UUID awayTeamId,
+    public TeamPlaysGame(UUID teamId,
                          UUID gameId,
                          Integer homeTeamScore,
                          Integer awayTeamScore) {
-        this.homeTeamId = homeTeamId;
-        this.awayTeamId = awayTeamId;
+        this.teamId = teamId;
         this.gameId = gameId;
         this.homeTeamScore = homeTeamScore;
         this.awayTeamScore = awayTeamScore;
     }
 
     public UUID getHomeTeamId() {
-        return homeTeamId;
-    }
-
-    public UUID getAwayTeamId() {
-        return awayTeamId;
+        return teamId;
     }
 
     public UUID getGameId() {

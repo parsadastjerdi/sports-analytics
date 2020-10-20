@@ -31,11 +31,13 @@ public class GameController {
         return gameService.getAllGames();
     }
 
+    /*
     @GetMapping(path = "{gameId}")
     public Game getGameById(@PathVariable("gameId") UUID gameId) {
         return gameService.getGameById(gameId)
                 .orElse(null);
     }
+*/
 
     @DeleteMapping(path = "{gameId}")
     public void deleteGameById(@PathVariable("gameId") UUID gameId) {
@@ -46,5 +48,11 @@ public class GameController {
     public void updateGameById(@PathVariable("gameId") UUID gameId,
                                @Valid @NonNull @RequestBody Game game) {
         gameService.updateGame(gameId, game);
+    }
+
+    @GetMapping(path = "{pointDifference}")
+    public List<Game> getAllGamesWhoseDiffWasLessThanX(
+            @PathVariable("pointDifference") Integer pointDifference) {
+        return gameService.getAllGamesWhoseDiffWasLessThanX(pointDifference);
     }
 }

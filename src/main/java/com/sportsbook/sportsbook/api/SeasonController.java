@@ -1,5 +1,6 @@
 package com.sportsbook.sportsbook.api;
 
+import com.sportsbook.sportsbook.model.Game;
 import com.sportsbook.sportsbook.model.Season;
 import com.sportsbook.sportsbook.service.SeasonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,11 +32,13 @@ public class SeasonController {
         return seasonService.getAllSeasons();
     }
 
+    /*
     @GetMapping(path = "{seasonId}")
     public Season getSeasonById(@PathVariable("seasonId") UUID seasonId) {
         return seasonService.getSeasonById(seasonId)
                 .orElse(null);
     }
+     */
 
     @DeleteMapping(path = "{seasonId}")
     public void deleteSeasonById(@PathVariable("seasonId") UUID seasonId) {
@@ -46,5 +49,10 @@ public class SeasonController {
     public void updateSeason(@PathVariable("seasonId") UUID seasonId,
                              @Valid @NonNull @RequestBody Season season) {
         seasonService.updateSeason(seasonId, season);
+    }
+
+    @GetMapping(path = "{seasonId}")
+    public List<Game> getAllGamesInASeason(@PathVariable("seasonId") UUID seasonId) {
+        return seasonService.getAllGamesInASeason(seasonId);
     }
 }

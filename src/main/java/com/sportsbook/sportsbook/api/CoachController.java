@@ -1,6 +1,7 @@
 package com.sportsbook.sportsbook.api;
 
 import com.sportsbook.sportsbook.model.Coach;
+import com.sportsbook.sportsbook.model.Team;
 import com.sportsbook.sportsbook.service.CoachService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
@@ -31,11 +32,13 @@ public class CoachController {
         return coachService.getAllCoaches();
     }
 
+    /*
     @GetMapping(path = "{coachId}")
     public Coach getCoachById(@PathVariable("coachId") UUID coachId) {
         return coachService.getCoachById(coachId)
                 .orElse(null);
     }
+*/
 
     @DeleteMapping(path = "{coachId}")
     public void deleteCoachById(@PathVariable("coachId") UUID coachId) {
@@ -46,5 +49,10 @@ public class CoachController {
     public void updateCoach(@PathVariable("coachId") UUID coachId,
                             @Valid @NonNull @RequestBody Coach coach) {
         coachService.updateCoach(coachId, coach);
+    }
+
+    @GetMapping(path = "{coachId}")
+    public List<Team> getAllTeamsForACoach(@PathVariable("coachId") UUID coachId) {
+        return coachService.getAllTeamsForACoach(coachId);
     }
 }

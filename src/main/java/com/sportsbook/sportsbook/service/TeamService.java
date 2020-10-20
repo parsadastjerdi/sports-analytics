@@ -1,6 +1,7 @@
 package com.sportsbook.sportsbook.service;
 
 import com.sportsbook.sportsbook.dao.TeamDao;
+import com.sportsbook.sportsbook.model.Coach;
 import com.sportsbook.sportsbook.model.Team;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -39,4 +40,7 @@ public class TeamService {
         return teamDao.updateTeamById(teamId, team);
     }
 
+    public List<Coach> getAllCoachesInAConference(String conference) {
+        return teamDao.getAllCoachesInAConference(conference);
+    }
 }

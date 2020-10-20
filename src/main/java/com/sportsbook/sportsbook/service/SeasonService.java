@@ -1,6 +1,7 @@
 package com.sportsbook.sportsbook.service;
 
 import com.sportsbook.sportsbook.dao.SeasonDao;
+import com.sportsbook.sportsbook.model.Game;
 import com.sportsbook.sportsbook.model.Season;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -37,5 +38,9 @@ public class SeasonService {
 
     public int updateSeason(UUID seasonId, Season season) {
         return seasonDao.updateSeasonById(seasonId, season);
+    }
+
+    public List<Game> getAllGamesInASeason(UUID seasonId) {
+        return seasonDao.getAllGamesInASeason(seasonId);
     }
 }

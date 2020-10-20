@@ -1,10 +1,12 @@
 package com.sportsbook.sportsbook.dao;
 
 import com.sportsbook.sportsbook.model.Coach;
+import com.sportsbook.sportsbook.model.Team;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -68,5 +70,21 @@ public class CoachDataAccessService implements CoachDao {
                 coach.getName(),
                 coach.getAge(),
                 coachId);
+    }
+
+    @Override
+    public List<Team> getAllTeamsForACoach(UUID coachId) {
+        final String sql = "select team.* " +
+                "from team, coach, CoachesTeam " +
+                "where CoachesTeam.coachId = coach.coachId AND " +
+                "CoachesTeam.teamId = team.teamId AND " +
+                "    coach.coachId = ?;";
+        return jdbcTemplate.query(sql, (resultSet, i) -> {
+            UUID teamId = UUID.fromString(resultSet.getString("teamId"));
+            return new Team(teamId,
+                    resultSet.getString("name"),
+                    resultSet.getString("city"),
+                    resultSet.getString("conference"));
+        }, coachId);
     }
 }

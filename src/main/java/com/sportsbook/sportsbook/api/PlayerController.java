@@ -31,11 +31,13 @@ public class PlayerController {
         return playerService.getAllPlayers();
     }
 
+    /*
     @GetMapping(path = "{playerId}")
     public Player getPlayerById(@PathVariable("playerId") UUID playerId) {
         return playerService.getPlayerById(playerId)
                 .orElse(null);
     }
+*/
 
     @DeleteMapping(path = "{playerId}")
     public void deletePlayerById(@PathVariable("playerId") UUID playerId) {
@@ -46,5 +48,10 @@ public class PlayerController {
     public void updatePlayerById(@PathVariable("playerId") UUID playerId,
                                  @Valid @NonNull @RequestBody Player player) {
         playerService.updatePlayer(playerId, player);
+    }
+
+    @GetMapping(path = "{teamId}")
+    public List<Player> getAllPlayersOnATeam(@PathVariable("teamId") UUID teamId) {
+        return playerService.getAllPlayersOnATeam(teamId);
     }
 }
