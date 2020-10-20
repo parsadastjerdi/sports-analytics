@@ -7,8 +7,6 @@ import java.util.UUID;
 
 public class Player {
     private final UUID playerId;
-    private final UUID teamId; // should be one to many
-
     @NotBlank
     private final String firstName;
     @NotBlank
@@ -16,22 +14,20 @@ public class Player {
     @NotBlank
     private final String position;
     @NotBlank
-    private final String height;
+    private final Integer height;
     @NotBlank
-    private final String weight;
+    private final Integer weight;
     @NotBlank
     private final Integer age;
 
     public Player(@JsonProperty("playerId") UUID playerId,
-                  @JsonProperty("teamId") UUID teamId,
                   @JsonProperty("firstName") String firstName,
                   @JsonProperty("lastName") String lastName,
                   @JsonProperty("position") String position,
-                  @JsonProperty("height") String height,
-                  @JsonProperty("weight") String weight,
+                  @JsonProperty("height") Integer height,
+                  @JsonProperty("weight") Integer weight,
                   @JsonProperty("age") Integer age) {
         this.playerId = playerId;
-        this.teamId = teamId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.position = position;
@@ -42,10 +38,6 @@ public class Player {
 
     public UUID getPlayerId() {
         return playerId;
-    }
-
-    public UUID getTeamId() {
-        return teamId;
     }
 
     public String getFirstName() {
@@ -60,11 +52,11 @@ public class Player {
         return position;
     }
 
-    public String getHeight() {
+    public Integer getHeight() {
         return height;
     }
 
-    public String getWeight() {
+    public Integer getWeight() {
         return weight;
     }
 

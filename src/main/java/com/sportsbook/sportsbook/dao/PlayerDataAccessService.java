@@ -22,12 +22,11 @@ public class PlayerDataAccessService implements PlayerDao {
     @Override
     public int insertPlayer(UUID playerId, Player player) {
         final String sql = "INSERT INTO player " +
-                "(playerId, teamId, firstName, lastName, position, height, weight, age)" +
-                " values (?, ?, ?, ?, ?, ?, ?, ?);";
+                "(playerId, firstName, lastName, position, height, weight, age)" +
+                " values (?, ?, ?, ?, ?, ?, ?);";
 
         return jdbcTemplate.update(sql,
                 playerId,
-                player.getTeamId(),
                 player.getFirstName(),
                 player.getLastName(),
                 player.getPosition(),
@@ -41,16 +40,13 @@ public class PlayerDataAccessService implements PlayerDao {
         final String sql = "SELECT * from player;";
         return jdbcTemplate.query(sql, (resultSet, i) -> {
             UUID playerId = UUID.fromString(resultSet.getString("playerId"));
-            UUID teamId = UUID.fromString(resultSet.getString("teamId"));
-
             return new Player(
                     playerId,
-                    teamId,
                     resultSet.getString("firstName"),
                     resultSet.getString("lastName"),
                     resultSet.getString("position"),
-                    resultSet.getString("height"),
-                    resultSet.getString("weight"),
+                    resultSet.getInt("height"),
+                    resultSet.getInt("weight"),
                     resultSet.getInt("age"));
         });
     }
@@ -60,16 +56,14 @@ public class PlayerDataAccessService implements PlayerDao {
         final String sql = "SELECT * FROM player WHERE playerId = ?;";
         Player player =  jdbcTemplate.queryForObject(sql, new Object[]{playerId}, (resultSet, i) -> {
             UUID id = UUID.fromString(resultSet.getString("playerId"));
-            UUID teamId = UUID.fromString(resultSet.getString("teamId"));
 
             return new Player(
                     id,
-                    teamId,
                     resultSet.getString("firstName"),
                     resultSet.getString("lastName"),
                     resultSet.getString("position"),
-                    resultSet.getString("height"),
-                    resultSet.getString("weight"),
+                    resultSet.getInt("height"),
+                    resultSet.getInt("weight"),
                     resultSet.getInt("age"));
         });
         return Optional.ofNullable(player);

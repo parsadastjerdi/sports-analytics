@@ -19,8 +19,16 @@ public class TeamDataAccessService implements TeamDao {
     }
 
     @Override
-    public int insertTeam(UUID id, Team team) {
-        return 0;
+    public int insertTeam(UUID teamId, Team team) {
+        final String sql = "INSERT INTO team " +
+                "(teamId, name, city, conference) " +
+                " values (?, ?, ?, ?);";
+
+        return jdbcTemplate.update(sql,
+                teamId,
+                team.getName(),
+                team.getCity(),
+                team.getConference());
     }
 
     @Override
@@ -28,53 +36,46 @@ public class TeamDataAccessService implements TeamDao {
         final String sql = "SELECT * FROM Team;";
 
         return jdbcTemplate.query(sql, (resultSet, i) -> {
-            UUID teamId = UUID.fromString(resultSet.getString("id"));
+            UUID teamId = UUID.fromString(resultSet.getString("teamId"));
             return new Team(
                     teamId,
-                    resultSet.getString("name"));
+                    resultSet.getString("name"),
+                    resultSet.getString("city"),
+                    resultSet.getString("conference"));
         });
     }
 
     @Override
-    public Optional<Team> selectTeamById(UUID id) {
-        final String sql = "SELECT * FROM Team WHERE id = ?";
+    public Optional<Team> selectTeamById(UUID teamId) {
+        final String sql = "SELECT * FROM Team WHERE teamId = ?";
 
-        Team team = jdbcTemplate.queryForObject(sql, new Object[]{id}, (resultSet, i) -> {
-          UUID teamId = UUID.fromString(resultSet.getString("id"));
+        Team team = jdbcTemplate.queryForObject(sql, new Object[]{teamId}, (resultSet, i) -> {
+          UUID id = UUID.fromString(resultSet.getString("teamId"));
           String name = resultSet.getString("name");
-          return new Team(teamId, name);
+          String city = resultSet.getString("city");
+          String conference = resultSet.getString("conference");
+          return new Team(id, name, city, conference);
         });
 
         return Optional.ofNullable(team);
     };
 
     @Override
-    public int deleteTeamById(UUID id) {
-        /*
-        Optional<Team> teamMaybe = selectTeamById(id);
-        if (teamMaybe.isEmpty()) {
-            return 0;
-        }
-        DB.remove(teamMaybe.get());
-        return 1;
-         */
-        return 0;
+    public int deleteTeamById(UUID teamId) {
+        final String sql = "DELETE FROM team WHERE teamId = ?";
+        return jdbcTemplate.update(sql, teamId);
     }
 
     @Override
-    public int updateTeamById(UUID id, Team updatedTeam) {
-        /*
-        return selectTeamById(id)
-                .map(team -> {
-                    int indexOfTeamToUpdate = DB.indexOf(team);
-                    if (indexOfTeamToUpdate >= 0) {
-                        DB.set(indexOfTeamToUpdate, new Team(id, updatedTeam.getName()));
-                        return 1;
-                    }
-                    return 0;
-                })
-                .orElse(0);
-         */
-        return 0;
+    public int updateTeamById(UUID teamId, Team updatedTeam) {
+        final String sql = "UPDATE team SET "
+                + "name = ?, city = ?, conference = ?"
+                + "WHERE teamId = ?";
+
+        return jdbcTemplate.update(sql,
+                updatedTeam.getName(),
+                updatedTeam.getCity(),
+                updatedTeam.getConference(),
+                teamId);
     }
 }
