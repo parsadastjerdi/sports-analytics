@@ -1,0 +1,5 @@
+-- insert into TeamPlaysGame(homeTeamId, awayTeamId, gameId, homeTeamScore, awayTeamScore) (
+   --  select homeTeam.teamId, awayTeam.teamId, game.gameId, 0, 0
+    -- from team as homeTeam, team as awayTeam, game
+    -- where homeTeam.teamId <> awayTeam.teamId
+-- );
