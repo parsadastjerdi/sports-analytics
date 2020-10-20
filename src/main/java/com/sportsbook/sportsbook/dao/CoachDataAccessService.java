@@ -55,7 +55,7 @@ public class CoachDataAccessService implements CoachDao {
 
     @Override
     public int deleteCoachById(UUID coachId) {
-        final String sql = "DELETE FROM coach WHERE coachID = ?;";
+        final String sql = "DELETE FROM coach WHERE coachId = ?;";
         return jdbcTemplate.update(sql, coachId);
     }
 
