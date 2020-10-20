@@ -6,4 +6,4 @@ CREATE TABLE Player (
     height INTEGER,
     weight INTEGER,
     age INTEGER
-)
+);

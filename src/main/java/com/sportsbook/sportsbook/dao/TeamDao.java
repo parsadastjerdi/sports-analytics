@@ -1,5 +1,6 @@
 package com.sportsbook.sportsbook.dao;
 
+import com.sportsbook.sportsbook.model.Coach;
 import com.sportsbook.sportsbook.model.Team;
 
 import java.util.List;
@@ -21,4 +22,6 @@ public interface TeamDao {
     int deleteTeamById(UUID teamId);
 
     int updateTeamById(UUID teamId, Team team);
+
+    List<Coach> getAllCoachesInAConference(String conference);
 }

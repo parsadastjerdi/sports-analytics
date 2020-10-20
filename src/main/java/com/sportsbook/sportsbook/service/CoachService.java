@@ -2,6 +2,7 @@ package com.sportsbook.sportsbook.service;
 
 import com.sportsbook.sportsbook.dao.CoachDao;
 import com.sportsbook.sportsbook.model.Coach;
+import com.sportsbook.sportsbook.model.Team;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -37,5 +38,9 @@ public class CoachService {
 
     public int updateCoach(UUID coachId, Coach coach) {
         return coachDao.updateCoachById(coachId, coach);
+    }
+
+    public List<Team> getAllTeamsForACoach(UUID coachId) {
+        return coachDao.getAllTeamsForACoach(coachId);
     }
 }

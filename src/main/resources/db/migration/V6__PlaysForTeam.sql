@@ -4,4 +4,4 @@ CREATE TABLE PlaysForTeam (
     PRIMARY KEY(playerId, teamId),
     startDate date,
     endDate date
-)
+);

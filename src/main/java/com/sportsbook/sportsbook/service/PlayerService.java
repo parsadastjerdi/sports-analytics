@@ -38,4 +38,8 @@ public class PlayerService {
     public int updatePlayer(UUID playerId, Player newPlayer) {
         return playerDao.updatePlayerById(playerId, newPlayer);
     }
+
+    public List<Player> getAllPlayersOnATeam(UUID teamId) {
+        return playerDao.getAllPlayersOnATeam(teamId);
+    }
 }

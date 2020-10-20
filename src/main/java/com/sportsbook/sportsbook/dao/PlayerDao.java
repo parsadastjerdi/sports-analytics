@@ -21,4 +21,6 @@ public interface PlayerDao {
     int deletePlayerById(UUID playerId);
 
     int updatePlayerById(UUID playerId, Player player);
+
+    List<Player> getAllPlayersOnATeam(UUID teamId);
 }

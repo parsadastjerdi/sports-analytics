@@ -1,5 +1,6 @@
 package com.sportsbook.sportsbook.dao;
 
+import com.sportsbook.sportsbook.model.Game;
 import com.sportsbook.sportsbook.model.Season;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -68,5 +69,20 @@ public class SeasonDataAccessService implements SeasonDao {
                 season.getStartDate(),
                 season.getEndDate(),
                 seasonId);
+    }
+
+    @Override
+    public List<Game> getAllGamesInASeason(UUID seasonId) {
+        final String sql = "select game.* " +
+                "from game, GamesInSeason, season " +
+                "where GamesInSeason.seasonId = ? AND " +
+                "    GamesInSeason.gameId = game.gameId;";
+        return jdbcTemplate.query(sql, (resultSet, i) -> {
+            UUID gameId = UUID.fromString(resultSet.getString("gameId"));
+            return new Game(
+                   gameId,
+                   resultSet.getString("venue"),
+                   resultSet.getDate("gameDate"));
+        }, seasonId);
     }
 }
