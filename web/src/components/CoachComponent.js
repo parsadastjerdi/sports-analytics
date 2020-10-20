@@ -23,6 +23,7 @@ class CoachComponent extends React.Component {
                         <tr>
                             <td>Coach Name</td>
                             <td>Coach Age</td>
+                            <td>Coach Id</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -32,6 +33,7 @@ class CoachComponent extends React.Component {
                                 <tr key = {coach.coachId}>
                                     <td>{coach.name}</td>
                                     <td>{coach.age}</td>
+                                    <td>{coach.coachId}</td>
                                 </tr>
                             )
                         }

@@ -6,6 +6,7 @@ import PlayerComponent from './components/PlayerComponent';
 import SeasonComponent from './components/SeasonComponent';
 import Tabs from './components/TabsComponent';
 import TeamComponent from './components/TeamComponent';
+import QueriesComponent from './components/QueriesComponent';
 
 function App() {
   return (
@@ -33,7 +34,7 @@ function App() {
         </div>
 
         <div label="queries">
-          
+          <QueriesComponent />
         </div>
 
       </Tabs>

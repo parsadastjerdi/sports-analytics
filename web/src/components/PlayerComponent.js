@@ -29,6 +29,7 @@ class PlayerComponent extends React.Component {
                             <td>Height</td>
                             <td>Weight</td>
                             <td>Age</td>
+                            <td>Player ID</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -42,6 +43,7 @@ class PlayerComponent extends React.Component {
                                     <td>{player.height}</td>
                                     <td>{player.weight}</td>
                                     <td>{player.age}</td>
+                                    <td>{player.playerId}</td>
                                 </tr>
                             )
                         }

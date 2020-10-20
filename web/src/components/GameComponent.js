@@ -23,6 +23,7 @@ class GameComponent extends React.Component {
                         <tr>
                             <td>Venue</td>
                             <td>Game Date</td>
+                            <td>Game Id</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -32,6 +33,7 @@ class GameComponent extends React.Component {
                                 <tr key = {game.gameId}>
                                     <td>{game.venue}</td>
                                     <td>{game.gameDate}</td>
+                                    <td>{game.gameId}</td>
                                 </tr>
                             )
                         }

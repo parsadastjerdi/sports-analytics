@@ -23,6 +23,7 @@ class SeasonComponent extends React.Component {
                         <tr>
                             <td>Start Date</td>
                             <td>End Date</td>
+                            <td>Season Id</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -32,6 +33,7 @@ class SeasonComponent extends React.Component {
                                 <tr key = {season.seasonId}>
                                     <td>{season.startDate}</td>
                                     <td>{season.endDate}</td>
+                                    <td>{season.seasonId}</td>
                                 </tr>
                             )
                         }

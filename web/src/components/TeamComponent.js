@@ -24,6 +24,7 @@ class TeamComponent extends React.Component {
                             <td>Team Name</td>
                             <td>Team City</td>
                             <td>Team Conference</td>
+                            <td>Team Id</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -34,6 +35,7 @@ class TeamComponent extends React.Component {
                                     <td>{team.name}</td>
                                     <td>{team.city}</td>
                                     <td>{team.conference}</td>
+                                    <td>{team.teamId}</td>
                                 </tr>
                             )
                         }
