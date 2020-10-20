@@ -12,7 +12,6 @@ import java.util.UUID;
 
 @Service
 public class TeamService {
-
     private final TeamDao teamDao;
 
     @Autowired
@@ -28,16 +27,16 @@ public class TeamService {
         return teamDao.selectAllTeams();
     }
 
-    public Optional<Team> getTeamById(UUID id) {
-        return teamDao.selectTeamById(id);
+    public Optional<Team> getTeamById(UUID teamId) {
+        return teamDao.selectTeamById(teamId);
     }
 
-    public int deleteTeam(UUID id) {
-        return teamDao.deleteTeamById(id);
+    public int deleteTeam(UUID teamId) {
+        return teamDao.deleteTeamById(teamId);
     }
 
-    public int updateTeam(UUID id, Team team) {
-        return teamDao.updateTeamById(id, team);
+    public int updateTeam(UUID teamId, Team team) {
+        return teamDao.updateTeamById(teamId, team);
     }
 
 }

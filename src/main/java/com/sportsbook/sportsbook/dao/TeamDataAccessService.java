@@ -47,7 +47,7 @@ public class TeamDataAccessService implements TeamDao {
 
     @Override
     public Optional<Team> selectTeamById(UUID teamId) {
-        final String sql = "SELECT * FROM Team WHERE teamId = ?";
+        final String sql = "SELECT * FROM Team WHERE teamId = ?;";
 
         Team team = jdbcTemplate.queryForObject(sql, new Object[]{teamId}, (resultSet, i) -> {
           UUID id = UUID.fromString(resultSet.getString("teamId"));
@@ -62,7 +62,7 @@ public class TeamDataAccessService implements TeamDao {
 
     @Override
     public int deleteTeamById(UUID teamId) {
-        final String sql = "DELETE FROM team WHERE teamId = ?";
+        final String sql = "DELETE FROM team WHERE teamId = ?;";
         return jdbcTemplate.update(sql, teamId);
     }
 
@@ -70,7 +70,7 @@ public class TeamDataAccessService implements TeamDao {
     public int updateTeamById(UUID teamId, Team updatedTeam) {
         final String sql = "UPDATE team SET "
                 + "name = ?, city = ?, conference = ?"
-                + "WHERE teamId = ?";
+                + "WHERE teamId = ?;";
 
         return jdbcTemplate.update(sql,
                 updatedTeam.getName(),

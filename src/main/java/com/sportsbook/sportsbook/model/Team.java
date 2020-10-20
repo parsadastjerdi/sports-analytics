@@ -6,6 +6,7 @@ import javax.validation.constraints.NotBlank;
 import java.util.UUID;
 
 public class Team {
+    @NotBlank
     private final UUID teamId;
     @NotBlank
     private final String name;
@@ -16,8 +17,8 @@ public class Team {
 
     public Team(@JsonProperty("teamId") UUID teamId,
                 @JsonProperty("name") String name,
-                @NotBlank String city,
-                @NotBlank String conference) {
+                @JsonProperty("city") String city,
+                @JsonProperty("conference") String conference) {
         this.teamId = teamId;
         this.name = name;
         this.city = city;

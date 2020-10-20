@@ -16,9 +16,9 @@ public interface TeamDao {
 
     List<Team> selectAllTeams();
 
-    Optional<Team> selectTeamById(UUID id);
+    Optional<Team> selectTeamById(UUID teamId);
 
-    int deleteTeamById(UUID id);
+    int deleteTeamById(UUID teamId);
 
-    int updateTeamById(UUID id, Team team);
+    int updateTeamById(UUID teamId, Team team);
 }

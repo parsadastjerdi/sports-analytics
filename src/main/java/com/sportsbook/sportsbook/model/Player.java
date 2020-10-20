@@ -6,6 +6,7 @@ import javax.validation.constraints.NotBlank;
 import java.util.UUID;
 
 public class Player {
+    @NotBlank
     private final UUID playerId;
     @NotBlank
     private final String firstName;

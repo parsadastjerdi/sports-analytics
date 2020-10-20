@@ -30,19 +30,20 @@ public class TeamController {
         return teamService.getAllTeams();
     }
 
-    @GetMapping(path = "{id}")
-    public Team getTeamById(@PathVariable("id") UUID id) {
-        return teamService.getTeamById(id)
+    @GetMapping(path = "{teamId}")
+    public Team getTeamById(@PathVariable("teamId") UUID teamId) {
+        return teamService.getTeamById(teamId)
                 .orElse(null);
     }
 
-    @DeleteMapping(path = "{id}")
-    public void deleteTeamById(@PathVariable("id") UUID id) {
+    @DeleteMapping(path = "{teamId}")
+    public void deleteTeamById(@PathVariable("teamId") UUID id) {
         teamService.deleteTeam(id);
     }
 
-    @PutMapping(path = "{id}")
-    public void updateTeam(@PathVariable("id") UUID id, @Valid @NonNull @RequestBody Team team) {
-        teamService.updateTeam(id, team);
+    @PutMapping(path = "{teamId}")
+    public void updateTeam(@PathVariable("teamId") UUID teamId,
+                           @Valid @NonNull @RequestBody Team team) {
+        teamService.updateTeam(teamId, team);
     }
 }
