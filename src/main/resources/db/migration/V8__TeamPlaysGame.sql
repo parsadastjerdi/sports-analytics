@@ -5,4 +5,4 @@ CREATE TABLE TeamPlaysGame (
     PRIMARY KEY (homeTeamId, awayTeamId, gameId),
     homeTeamScore Integer,
     awayTeamScore Integer
-)
+);

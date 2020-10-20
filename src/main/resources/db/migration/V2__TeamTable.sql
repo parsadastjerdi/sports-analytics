@@ -1,6 +1,6 @@
 CREATE TABLE Team (
     teamId UUID NOT NULL PRIMARY KEY,
-    name VARCHAR(30),
-    city VARCHAR(30),
+    name VARCHAR(100),
+    city VARCHAR(100),
     conference VARCHAR(4)
-)
+);

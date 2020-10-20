@@ -21,11 +21,10 @@ public class GameDataAccessService implements GameDao {
     @Override
     public int insertGame(UUID gameId, Game game) {
         final String sql = "INSERT INTO game " +
-                "(gameId, seasonId, venue, gameDate) " +
-                "values (?, ?, ?, ?);";
+                "(gameId, venue, gameDate) " +
+                "values (?, ?, ?);";
         return jdbcTemplate.update(sql,
                 gameId,
-                game.getSeasonId(),
                 game.getVenue(),
                 game.getGameDate());
     }
@@ -35,10 +34,8 @@ public class GameDataAccessService implements GameDao {
         final String sql = "SELECT * FROM game;";
         return jdbcTemplate.query(sql, (resultSet, i) -> {
             UUID gameId = UUID.fromString(resultSet.getString("gameId"));
-            UUID seasonId = UUID.fromString(resultSet.getString("seasonId"));
             return new Game(
                     gameId,
-                    seasonId,
                     resultSet.getString("venue"),
                     resultSet.getDate("gameDate"));
         });
@@ -49,9 +46,7 @@ public class GameDataAccessService implements GameDao {
         final String sql = "SELECT * FROM game WHERE gameId = ?;";
         Game game = jdbcTemplate.queryForObject(sql, new Object[]{gameId}, (resultSet, i) -> {
             UUID gid = UUID.fromString(resultSet.getString("gameId"));
-            UUID seasonId = UUID.fromString(resultSet.getString("seasonId"));
             return new Game(gid,
-                    seasonId,
                     resultSet.getString("venue"),
                     resultSet.getDate("gameDate"));
         });
@@ -67,10 +62,9 @@ public class GameDataAccessService implements GameDao {
     @Override
     public int updateGameById(UUID gameId, Game game) {
         final String sql = "UPDATE game SET " +
-                "seasonId = ?, venue = ?, gameDate = ? " +
+                "venue = ?, gameDate = ? " +
                 "WHERE gameId = ?;";
         return jdbcTemplate.update(sql,
-                game.getSeasonId(),
                 game.getVenue(),
                 game.getGameDate(),
                 gameId);
